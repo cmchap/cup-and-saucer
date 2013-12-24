@@ -29,6 +29,18 @@
 	viewer.setParameter('CreaseAngle', '45');
 	viewer.init();
 	viewer.update();
+
+	var timerID = 0;
+	// setup event handlers to detect interactions
+	viewer.onmousedown = viewer.onmouseup = function() {
+	  // stop animation if any
+	  if(timerID > 0) {
+	    clearInterval(timerID);
+	    timerID = 0;
+	  }
+	};
+	// start to rotate model horizontally at increment of 3 degrees per 60 millisecs
+	timerID = setInterval(function(){viewer.rotate(0, -3, 0); viewer.update();}, 60);
   </script>
  </BODY>
 </HTML>
